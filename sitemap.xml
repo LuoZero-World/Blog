@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://luozero-world.github.io/Blog/2023/12/28/2023-zhe-yi-nian/</loc>
+    <loc>https://luozero-world.github.io/Blog/2025/01/12/hello-world/</loc>
     
     <lastmod>2025-01-12</lastmod>
     
@@ -12,6 +12,15 @@
   
   <url>
     <loc>https://luozero-world.github.io/Blog/about/index.html</loc>
+    
+    <lastmod>2025-01-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://luozero-world.github.io/Blog/2023/12/28/2023-zhe-yi-nian/</loc>
     
     <lastmod>2025-01-12</lastmod>
     
