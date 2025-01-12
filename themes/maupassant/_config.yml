@@ -122,7 +122,7 @@ widgets: ## Seven widgets in sidebar provided: search, info, category, tag, rece
   - links
 
 info:
-  avatar: /img/myphoto.jpg
+  avatar: /Blog/img/myphoto.jpg
   discription: Premature optimization is the root of all evil.
   outlinkitem:
     - name: envelope

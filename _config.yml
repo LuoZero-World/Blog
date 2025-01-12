@@ -46,15 +46,11 @@ relative_link: false
 future: true
 syntax_highlighter: highlight.js
 highlight:
+  enable: false
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'ghcolors'      # 自带的主题样式有很多，可以去官方网站查看
   line_number: true
-  auto_detect: false
-  tab_replace: ''
-  wrap: true
-  hljs: false
-prismjs:
-  preprocess: true
-  line_number: true
-  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -105,3 +101,14 @@ deploy:
   type: git
   repo: https://github.com/LuoZero-World/Blog.git
   branch:  gh-pages
+
+permalink_pinyin:
+  enable: true
+
+sitemap:
+  path:
+    - sitemap.xml
+    - sitemap.txt
+  rel: false
+  tags: true
+  categories: true
