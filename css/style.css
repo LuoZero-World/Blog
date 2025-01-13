@@ -90,7 +90,7 @@ div {
   overflow: hidden;
 }
 #header .site-name #logo {
-  font: bold 38px/1.12 "Times New Roman", Georgia, Times, sans-serif;
+  font: bold 38px/1.12 "montserrat-variable", "Times New Roman", Georgia, Times, sans-serif;
   color: #555;
 }
 #header .site-name #logo span, #header .site-name #logo:hover {
@@ -240,7 +240,7 @@ div {
   margin: 0;
   color: #555;
   text-align: left;
-  font: bold 25px/1.1 "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
+  font: bold 25px/1.1 "montserrat-variable", "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
 }
 .post .post-title a {
   color: #555;
