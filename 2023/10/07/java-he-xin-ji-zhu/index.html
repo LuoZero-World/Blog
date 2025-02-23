@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="zh-CN"><head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end --><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="编程路上的随笔"><title>Java核心技术I (Version.12) | LuoZero's World</title><link rel="stylesheet" type="text/css" href="/Blog/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="https://unpkg.com/normalize.css"><link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss/build/pure-min.css"><link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="https://unpkg.com/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/Blog/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/Blog/favicon.ico"><link rel="apple-touch-icon" href="/Blog/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/Blog/apple-touch-icon.png"><script type="text/javascript" src="https://unpkg.com/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="https://unpkg.com/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="https://unpkg.com/toastr/build/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/Blog/css/prism-ghcolors.css" type="text/css">
+<link rel="stylesheet" href="/Blog/css/prism-line-numbers.css" type="text/css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Java核心技术I (Version.12)</h1><a id="logo" href="/Blog/.">LuoZero's World</a><p class="description">和光同尘,与时舒卷</p></div><div id="nav-menu"><a class="current" href="/Blog/."><i class="fa fa-home"> 首页</i></a><a href="/Blog/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/Blog/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Java核心技术I (Version.12)</h1><div class="post-meta">2023-10-07<span> | </span><span class="category"><a href="/Blog/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i><span class="post-count"> 7</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/Blog/2023/10/07/java-he-xin-ji-zhu/#waline"><span class="waline-comment-count" id="/Blog/2023/10/07/java-he-xin-ji-zhu/"></span><span> 条评论</span></a><div class="post-content"><h3 id="IV-对象与类"><a href="#IV-对象与类" class="headerlink" title="IV. 对象与类"></a>IV. 对象与类</h3><ol>
+<li><p><strong>记录</strong></p>
+<p>记录是一种特殊形式的类，其状态不可变，而且公共可读。如果需要完全由一组变量表示不可变数据，那么应该使用记录</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例字段x、y称为组件</span></span><br><span class="line"><span class="keyword">record</span> <span class="title class_">Point</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y)</span>&#123;</span><br><span class="line">  <span class="comment">//这是自定义构造器</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Point</span><span class="params">()</span> &#123;<span class="built_in">this</span>(<span class="number">0</span>, <span class="number">0</span>)&#125;   </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//【自动定义地】设置所有实例字段的构造器称为标准构造器</span></span><br><span class="line">  <span class="comment">//标准构造器也可以被提供</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Point</span><span class="params">(<span class="type">double</span> x, <span class="type">double</span> y)</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//还有简洁形式，但简洁形式的主体是标准构造器的“前奏”</span></span><br><span class="line">  <span class="comment">//它只是在为实例字段赋值前修改参数变量x、y</span></span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  *  public Point&#123;</span></span><br><span class="line"><span class="comment">  *     if(x &gt; y) y += x;</span></span><br><span class="line"><span class="comment">  *  &#125;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<br/>
+
+<h3 id="V-继承"><a href="#V-继承" class="headerlink" title="V.继承"></a>V.继承</h3><ol>
+<li><p><strong>完美equals编写</strong></p>
+<ol>
+<li>将显式参数命名为otherObject， 稍后需要将它强转为other</li>
+<li>检测 this 与 otherObject 是否相同（这句只是一个小优化）</li>
+<li>检测 other0bject 是否为null, 如果为 null, 则返回 false</li>
+<li>比较 this 与 otherObject 的类。如果 <strong>equals的语义可以在子类中改变</strong>, 就使用<code>getClass</code>检测；如果<strong>所有的子类都有相同的相等性语义</strong>，则可以使用<code>instanceof</code>检测</li>
+<li>现在根据相等性概念的要求来比较字段。使用<code>==</code>比较基本类型字段，使用<code>Objects.equals()</code> 比较对象字段。如果所有的字段都匹配, 就返回 true。子类如果重新定义了<code>equals</code>，就要包含一个<code>super.equal(other)</code>调用</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object otherObject)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">this</span> == otherObject) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(otherObject == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* equals 子类语义有改变</span></span><br><span class="line"><span class="comment">    * if(getClass() != otherObject.getClass()) return false;</span></span><br><span class="line"><span class="comment">    * ClassName other = (ClassName) otherObject;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="comment">/* equals 子类语义均一致</span></span><br><span class="line"><span class="comment">    * if(!(otherObject instanceof ClassName other)) return false;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> filed1 == other.filed1</span><br><span class="line">      &amp;&amp; Object.equals(filed2, other.filed2)</span><br><span class="line">      &amp;&amp;...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>super</code>不是一个对象的引用，只是一个指示编译器调用超类方法的特殊关键字</p>
+</li>
+<li><p>重写的方法，方法签名（指一个<strong>方法的名称和参数列表</strong>）必须一样，而返回类型只需要<strong>更严格</strong>就行（称为有<strong>协变</strong>的返回类型），方法可见性需要更宽松。</p>
+</li>
+<li><p><code>protected</code>类型，同包和子类可访问。但是考虑下面这种情况</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Fa</span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">fun</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Son1</span> <span class="keyword">extends</span> <span class="title class_">Fa</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Son2在另一个包中</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Son2</span> <span class="keyword">extends</span> <span class="title class_">Fa</span>&#123;</span><br><span class="line">  <span class="keyword">void</span> <span class="title function_">f</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//ok</span></span><br><span class="line">    fun()</span><br><span class="line">    <span class="comment">//error: The method fun() from the type Fa is not visible</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Son1</span>().fun();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原因就在于，Son1中的fun方法是从Fa中继承的，【其可见性是对于Son1而言的】</span></span><br><span class="line"><span class="comment">//只对Son1同包或者Son1的子类可见，Son2中自然不可见</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<br/>
+
+<h3 id="VI-接口、lambda与内部类"><a href="#VI-接口、lambda与内部类" class="headerlink" title="VI. 接口、lambda与内部类"></a>VI. 接口、lambda与内部类</h3><ol>
+<li><p>对于<strong>匿名类</strong>，以下测试会失败</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//equals</span></span><br><span class="line"><span class="keyword">if</span>(getClass() != other.getClass()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//因为每个匿名类类型：外部类类名$1、外部类类名$2、...</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何在静态方法中获取调用静态方法的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.getClass();    <span class="comment">//Error, 静态方法中没有this</span></span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Object</span>()&#123;&#125;.getClass.getEnclosingClass()   <span class="comment">//Success</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Java9后，接口中的方法可以是<code>private</code>，但只能用做其他方法的辅助</p>
+</li>
+<li><p>Object中定义了<code>protected Object clone()&#123;...&#125;</code>，如果任何类想要实现克隆自己，那么应该在类中重写这个方法<code>public ClassName clone()&#123;...&#125;</code>（记得<code>Cloneable</code>）。如此一来，在其他类中便可以调用这个类的<code>clone</code>方法获取其克隆对象，否则调用<code>clone</code>是不可见的，详见 V.4</p>
+</li>
+</ol>
+<br/>
+
+<h3 id="VII-异常、断言和日志"><a href="#VII-异常、断言和日志" class="headerlink" title="VII.异常、断言和日志"></a>VII.异常、断言和日志</h3><ol>
+<li><p>一个方法必须声明所有可能抛出的<strong>检查型异常</strong>，而<strong>非检查型异常</strong>要么在你的控制之外(Error，jvm层面的错误)，要么从一开始就应该避免（RuntimeException）</p>
+</li>
+<li><p>异常使用技巧：</p>
+<ol>
+<li><strong>早抛出，晚捕获</strong>。例如，当栈为空时，<code>Stack.pop</code>是该返回<code>null</code>，还是抛出一个异常？著者认为是后者，因为这要好于以后出现一个<code>NullPointerException</code>异常</li>
+<li><strong>使用标准化方式报告异常</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Objects::</span><br><span class="line">  requireNonNull</span><br><span class="line">  checkIndex</span><br><span class="line">  checkFromIndex</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p><strong>断言失败</strong>是致命的、不可恢复的错误；不要捕获断言异常，断言是用来测试而不是从中恢复，只适用于测试和开发环境；</p>
+<p>私认为，可以类比于用<code>printf</code>进行调式</p>
+</li>
+</ol>
+<br/>
+
+<h3 id="VIII-泛型程序设计"><a href="#VIII-泛型程序设计" class="headerlink" title="VIII.泛型程序设计"></a>VIII.泛型程序设计</h3><ol>
+<li><p><strong>PESC原则：</strong>（将泛型容器看作P或者C）</p>
+<ol>
+<li>频繁往外读取内容的，适合用上界<code>Extends</code></li>
+<li>经常往里插入的，适合用下界<code>Super</code></li>
+</ol>
+<p>为何会出现<strong>通配符类型：<strong>假定有<code>Fruit</code>类和<code>Apple</code>类，二者有继承关系，然后有一个简单的泛型容器<code>Plate&lt;T&gt;</code>，代表装…的盘子。问题来了：<code>Plate&lt;Fruit&gt;</code>和<code>Plate&lt;Apple&gt;</code>没有任何继承关系</strong>（即泛型没有协变性）</strong>， 所以下述语句虽然逻辑上有理，但Java编译器不通过：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plate&lt;Fruit&gt; p= <span class="keyword">new</span> <span class="title class_">Plate</span>&lt;Apple&gt;(<span class="keyword">new</span> <span class="title class_">Apple</span>());</span><br></pre></td></tr></table></figure>
+
+<p>为了让泛型容器之间产生联系，便有了上界通配符<code>&lt;? extends T&gt;</code>和下界通配符<code>&lt;? super T&gt;</code>，举个例子，<code>&lt;? extends Fruit&gt;</code>的子类型有<code>&lt;Apple&gt;、&lt;Orange&gt;…</code>， <code>&lt;? super Apple&gt;</code>的子类型有<code>&lt;Fruit&gt;、&lt;Object&gt;…</code></p>
+</li>
+<li><p><strong>虚拟机中的泛型擦除</strong>：</p>
+<ol>
+<li><p>虚拟机中没有泛型，只有普通的类和方法</p>
+</li>
+<li><p>所有类型参数都会替换为它们的<strong>限定类型</strong><code>(e.g. T -&gt; Object, U extends Comparable&amp;Runnable -&gt; Comparable，必要时添加Runnable强转)</code></p>
+</li>
+<li><p>会<strong>合成桥方法</strong>来保持多态</p>
+<p>在Java代码中，方法名称和参数类型指定一个方法；而在<strong>虚拟机</strong>中，<strong>方法名称</strong>、<strong>参数类型</strong>和<strong>返回值</strong>共同指定一个方法。故而桥方法可以合理存在；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&lt;T&gt;&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fun</span><span class="params">(T args1)</span>&#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> <span class="keyword">extends</span> <span class="title class_">A</span>&lt;LocalDate&gt;&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fun</span><span class="params">(LocalDate args1)</span>&#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*上述代码目的是重写fun，但类型擦除后B中会有这俩fun</span></span><br><span class="line"><span class="comment">* public void fun(Object args1)</span></span><br><span class="line"><span class="comment">* public void fun(LoaclDate args1)</span></span><br><span class="line"><span class="comment">* 两个方法显然不一样，但逻辑上应该一样，从而保证多态</span></span><br><span class="line"><span class="comment">* 因此编译器在B中合成一个桥方法，这才是真正重写fun的方法</span></span><br><span class="line"><span class="comment">* public void fun(Object args1)&#123;fun((LoaclDate)args1)&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//桥方法不只用于泛型类型，还出现在方法重写</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Employee</span> <span class="keyword">implements</span> <span class="title class_">Cloneable</span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> Employee <span class="title function_">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException&#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*实际上，Employee有俩clone方法：</span></span><br><span class="line"><span class="comment">* Employee clone()    自己定义的</span></span><br><span class="line"><span class="comment">* Object clone()      合成的桥方法，覆盖了Object.clone</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+<li><p>为保持类型安全性，必要时会插入强制类型转换</p>
+</li>
+</ol>
+</li>
+</ol>
+<br/>
+
+<h3 id="IX-集合"><a href="#IX-集合" class="headerlink" title="IX.集合"></a>IX.集合</h3><ol>
+<li><p><code>Iterator</code>迭代器，不要想着迭代器指向某个元素，而应该认为迭代器位于两个元素中间，当调用<code>next</code>时，迭代器就会<strong>越过</strong>下一个元素，并返回刚刚越过的那个元素</p>
+<img src="/Blog/img/d5605913432ca6c83ef602e065f2ed64.jpg" alt="iterator.jpg" style="zoom:10%;" /></li>
+<li><p>在迭代过程中，如果集合被其他线程修改，迭代失效，抛出<code>ConcurrentModificationException</code>异常；但<code>CopyOnWriteArrayList</code>和<code>CopyOnWriteArraySet</code>除外，<strong>写时拷贝数组</strong>的迭代器在迭代过程中，即使数组被修改仍然可以正常访问（但可能过时）视图。</p>
+<br/></li>
+</ol>
+<h3 id="XII-并发"><a href="#XII-并发" class="headerlink" title="XII.并发"></a>XII.并发</h3><ol>
+<li><p>java线程有6种状态：<code>New</code> <code>Runnable</code> <code>Blocked</code> <code>Waiting</code> <code>Timed waiting</code> <code>Terminated</code></p>
+<img src="/Blog/img/a2ee154e13f7cb642148cfc548521932.jpg" alt="thread.jpg" style="zoom:10%;" /></li>
+<li><p>除了已经废弃的<code>stop</code>方法，没有办法强制一个线程终止，但可以用<code>interrupted</code>来请求终止一个线程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//阻塞和中断相遇，会抛出InterruptedException</span></span><br><span class="line">实例方法isInterrupted 调用后不会改变中断状态 </span><br><span class="line">静态方法interrupted 调用后会清除【当前执行线程】的中断状态</span><br></pre></td></tr></table></figure></li>
+<li><p>同步操作：</p>
+<ol>
+<li><p><strong>Lock&#x2F;Condition</strong></p>
+</li>
+<li><p><strong>synchronized</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//等同于使用该对象的内部锁</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//而wait、notifyAll/notify等同于使用内部锁关联的条件对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用一个对象的锁来实现额外的原子操作，称为客户端锁定</span></span><br><span class="line"><span class="comment">//但这样完全依赖于：Vector类会对自己的所有更改器方法使用内部锁</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">(Vector&lt;Integer&gt; vInt, ...)</span>&#123;</span><br><span class="line">    <span class="comment">//同步块</span></span><br><span class="line">    synchronsized(vInt)&#123;</span><br><span class="line">        vInt.set(...);</span><br><span class="line">        vInt.set(...);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>volatile字段</strong></p>
+<p>适用于共享变量只存在<strong>赋值操作</strong>，不会进行其他操作</p>
+</li>
+<li><p><strong>线程安全的集合</strong></p>
+<p>阻塞队列、并发散列映射、并发集、写时拷贝数组、使用同步包装器</p>
+</li>
+</ol>
+</li>
+</ol>
+</div><script type="text/javascript" src="/Blog/js/share.js?v=1.0.0" async></script><a class="article-share-link" data-url="https://luozero-world.github.io/Blog/2023/10/07/java-he-xin-ji-zhu/" data-id="cm7hretig0002zotjfjqnf2ck" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACxElEQVR42u3b0W4bMQwEQP//T7tAn1oEjncpMQnauScjuNxpFECkSebxiK/n76v9/OdPPj7t4/XxOa/WcPnCw8PDGy09eWV+5+fPT7Yjv//V8/Hw8PC2eUkwSBbxObINPCf34OHh4f0EXnL0t/cnyTceHh7ev8rLfzdPlJPfwsPDw/suXl5iSF6TFHPP13C51oKHh4cX8/YaYHuff0R/Dw8P77/kPcsrb+fnowMn63mzWjw8PLwFXt7aT2D51rRb1iblj3ZyAQ8PDy/mJeXX2Zf8fIn5k/P1/BX38PDw8K7y8kP2botroyBS/DHw8PDwjnlt+pt/bpPpNpWPgg0eHh7eVd5sGHQ27t8uejhi1Xbt8PDw8I6/lZ+UJNoCxEnYSIrIeHh4eBu8HNAO97dH/Cylju7Bw8PDW+Ml7f/8oE8S7lmxo95oPDw8vAVeW55oywRJCSPZ0BkVDw8Pb4OXt+Tz43g2rpqHkKLsi4eHh3eVd6ucOivX3mq8vXwjHh4e3jLvfBB/drWjWsWa8fDw8NZ4yQGdJ9BHY1JxWCoCAx4eHt4aL29Nta2sfONulTDw8PDwtnl58+mkw9bi820tvjHg4eHhHfPy474tIrQJcb6VbXKPh4eHd5fXvmC2lHyhyRPyEgkeHh7eBi9PT09S56jkWo4OJE0yPDw8vA1efuzOSqvtiNVJoMLDw8P7Lt6sUNsWefOxqqPRBDw8PLwFXv41vm2VzcZVZ7l/9HY8PDy8S7xnec02JXlXm1hHYQMPDw9vgTc7vvPiQhGX4sT61uACHh4e3gmvHVedFS/yFLwNDG8CFR4eHt4abxYMbqXCt0obbybL8PDw8L6cd9LQmg1s5cWOC4EBDw8P7wt5yQBBnhy3owlvSsN4eHh4a7zZ2FOe8rZ3zgoWF8q4eHh4eI+b/4OZP242atBuZbvFeHh4eMe8X28xh1w/A/+JAAAAAElFTkSuQmCC">分享</a><div class="tags"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a></li></ul></div><div class="post-nav"><a class="pre" href="/Blog/2023/12/28/2023-zhe-yi-nian/">2023这一年</a></div><div class="nofancybox" id="waline"></div><link rel="stylesheet" type="text/css" href="https://unpkg.com/@waline/client@v3/dist/waline.css"><script type="module">import {init} from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+init({
+  el: '#waline',
+  comment: true,
+  serverURL: 'waline-sigma.vercel.app',
+  pageSize: '10',
+  wordLimit: '500',
+  requiredMeta,
+  emoji: [
+    '//unpkg.com/@waline/emojis@1.2.0/weibo',
+    '//unpkg.com/@waline/emojis@1.2.0/qq',
+    '//unpkg.com/@waline/emojis@1.2.0/tw-emoji',
+  ],
+});</script><script>let metaInfo = ['nick', 'mail', 'link']
+let requiredMeta = 'nick,mail'.split(',').filter(item => {
+  return metaInfo.indexOf(item) > -1
+})
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img class="nofancybox" src="/Blog/img/myphoto.jpg"/></a><p>Premature optimization is the root of all evil.</p><a class="info-icon" href="mailto:13097638440@163.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/LuoZero-World" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://space.bilibili.com/649588534" title="Bilibili" target="_blank" style="margin-inline:5px"> <i class="fa fa-reddit-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Blog/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Blog/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/Blog/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">项目总结</a><span class="category-list-count">1</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/Blog/tags/2023/" style="font-size: 15px;">2023</a> <a href="/Blog/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 15px;">基础知识</a> <a href="/Blog/tags/2024/" style="font-size: 15px;">2024</a> <a href="/Blog/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/Blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/Blog/tags/JUC/" style="font-size: 15px;">JUC</a> <a href="/Blog/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">推荐系统</a> <a href="/Blog/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/Blog/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/Blog/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/Blog/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/Blog/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 15px;">图论</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/Blog/2025/02/23/suan-fa-mo-ban/">算法模板</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2025/01/12/hu-lun-tun-zao-yu-hou-ji/">囫囵吞枣与2024后记</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2024/06/12/yin-le-tui-jian-xi-tong/">音乐推荐系统</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2024/05/23/java-duo-xian-cheng-she-ji-mo-shi/">Java多线程设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2023/12/28/2023-zhe-yi-nian/">2023这一年</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2023/10/07/java-he-xin-ji-zhu/">Java核心技术I (Version.12)</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://chuixue-lan.github.io/Blog/" title="吹雪の博客" target="_blank">吹雪の博客</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2025 <a href="/Blog/." rel="nofollow">LuoZero's World.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/Blog/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="https://unpkg.com/@fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/Blog/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="https://unpkg.com/@fancyapps/fancybox/dist/jquery.fancybox.min.css"><link rel="stylesheet" type="text/css" href="/Blog/css/search.css?v=1.0.0"><script type="text/javascript" src="/Blog/js/search.js?v=1.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+  search_path = 'search.xml';
+}
+var path = '/Blog/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/Blog/js/copycode.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/Blog/css/copycode.css?v=1.0.0"><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/Blog/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/Blog/js/smartresize.js?v=1.0.0"></script></div></body></html>
