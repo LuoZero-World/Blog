@@ -1,0 +1,333 @@
+<!DOCTYPE html><html lang="zh-CN"><head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end --><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="编程路上的随笔"><title>Java多线程设计模式 | LuoZero's World</title><link rel="stylesheet" type="text/css" href="/Blog/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="https://unpkg.com/normalize.css"><link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss/build/pure-min.css"><link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="https://unpkg.com/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/Blog/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/Blog/favicon.ico"><link rel="apple-touch-icon" href="/Blog/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/Blog/apple-touch-icon.png"><script type="text/javascript" src="https://unpkg.com/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="https://unpkg.com/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="https://unpkg.com/toastr/build/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/Blog/css/prism-ghcolors.css" type="text/css">
+<link rel="stylesheet" href="/Blog/css/prism-line-numbers.css" type="text/css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Java多线程设计模式</h1><a id="logo" href="/Blog/.">LuoZero's World</a><p class="description">和光同尘,与时舒卷</p></div><div id="nav-menu"><a class="current" href="/Blog/."><i class="fa fa-home"> 首页</i></a><a href="/Blog/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/Blog/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Java多线程设计模式</h1><div class="post-meta">2024-05-23<span> | </span><span class="category"><a href="/Blog/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 2.4k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i><span class="post-count"> 9</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/Blog/2024/05/23/java-duo-xian-cheng-she-ji-mo-shi/#waline"><span class="waline-comment-count" id="/Blog/2024/05/23/java-duo-xian-cheng-she-ji-mo-shi/"></span><span> 条评论</span></a><div class="post-content"><h3 id="多线程评价标准"><a href="#多线程评价标准" class="headerlink" title="多线程评价标准"></a>多线程评价标准</h3><ul>
+<li><p><strong>安全性</strong>——不损坏对象	&#x3D;&#x3D;【必须】&#x3D;&#x3D;</p>
+</li>
+<li><p><strong>生存性&#x2F;活性</strong>——必要的处理能够被执行	&#x3D;&#x3D;【必须】&#x3D;&#x3D;</p>
+</li>
+<li><p><strong>可复用性</strong>——类可重复利用，e.g. JUC</p>
+</li>
+<li><p><strong>性能</strong>——能快速、大批量处理：吞吐量、响应性、容量</p>
+</li>
+</ul>
+<br/>
+
+<h3 id="I-Single-Threaded-Execution模式"><a href="#I-Single-Threaded-Execution模式" class="headerlink" title="I.Single Threaded Execution模式"></a>I.Single Threaded Execution模式</h3><p>该模式会将修改或引用实例状态的地方设置为<strong>临界区</strong>，用于实现对临界资源的保护，即确保同一时间内只有一个线程执行处理。使用时应确定<strong>保护对象</strong>、<strong>以什么单位保护</strong>、<strong>使用哪个锁保护</strong></p>
+<blockquote>
+<p>synchronized</p>
+</blockquote>
+<p> <code>char</code> <code>int</code> 等基本类型，以及对象等引用类型的<strong>读写操作</strong>是原子的，而<code>long</code> <code>double</code>在32位JVM上的读写不是原子的, 而在64位JVM上是原子的</p>
+<blockquote>
+<p>JUC-Semaphore</p>
+</blockquote>
+<p>当我们想要确保某个区域“最多只能由N个线程”执行，就需要用<strong>计数信号量</strong>来控制</p>
+<br/>
+
+<p><strong>课后习题</strong></p>
+<ol>
+<li><p>在<strong>Single Threaded Execution</strong> 模式中，满足下述条件时，死锁便会发生：</p>
+<ul>
+<li>存在多个<code>SharedResource</code>角色</li>
+<li>请求和保持、不可剥夺</li>
+<li>获取<code>SharedResouce</code>角色的锁的顺序不固定（循环等待）</li>
+</ul>
+<p>那么我们破坏任一条件便可防止死锁发生，考虑<strong>哲学家进餐问题</strong>，我们可以有如下的解决思路：</p>
+<ul>
+<li>将筷子<strong>打包</strong>，以包作为竞争单位。</li>
+<li>每个人都按照 筷1 -&gt; 筷2 … 的顺序竞争。</li>
+</ul>
+<p>循环等待的前提便是有多个资源，即条件三的前提是条件一</p>
+</li>
+</ol>
+<br/>
+
+<h3 id="II-Immutable"><a href="#II-Immutable" class="headerlink" title="II.Immutable"></a>II.Immutable</h3><p>该模式旨在使用<strong>确保实例状态不会发生改变的类</strong>，这样在访问这些实例变量时无须执行互斥处理，故而可以提高性能</p>
+<blockquote>
+<p>何时使用Immutable</p>
+</blockquote>
+<ul>
+<li>实例创建后，状态不再发生改变</li>
+<li>实例是共享的，且被频繁访问</li>
+</ul>
+<blockquote>
+<p>考虑成对的mutable和immutable</p>
+</blockquote>
+<p>为提高性能，将类分为<code>mutable</code>和<code>immutable</code>两种实现；e.g. <code>String</code>和<code>StringBuffer</code></p>
+<br/>
+
+<h3 id="III-Guarded-Suspension"><a href="#III-Guarded-Suspension" class="headerlink" title="III.Guarded Suspension"></a>III.Guarded Suspension</h3><p>该模式类似于“附加<strong>条件</strong>的<code>synchronized</code>”模式，相当于在<code>Single Threaded Execution</code>模式的基础上引入了<strong>同步机制</strong>：即消费者应该在队列不为空是才能取，生产者在队列不满时才能放</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//伪代码实现</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GuardObject</span>&#123;</span><br><span class="line">    syn <span class="title function_">guardedMethod</span><span class="params">()</span>&#123;</span><br><span class="line">      <span class="keyword">while</span>(守护条件) wait();</span><br><span class="line">      目标处理</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    syn <span class="title function_">stateChangedMethod</span><span class="params">()</span>&#123;</span><br><span class="line">      目标处理</span><br><span class="line">      notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p><strong>课后习题</strong></p>
+<ol>
+<li><code>wait()</code> 和 <code>notifyAll()</code> 操作的都是<code>this</code>的等待队列，和你<code>GuardObject</code>中的自定义字段（e.g. queue）毫无关系</li>
+<li>在实现<strong>同步机制</strong>时，具有对称性的代码很有可能导致死锁，这个时候我们不妨加入一个<strong>种子</strong>，从而保证代码正常运行&#x2F;正常结束</li>
+</ol>
+<br/>
+
+<h3 id="IV-Balking"><a href="#IV-Balking" class="headerlink" title="IV.Balking"></a>IV.Balking</h3><p>该模式与<code>Guarded Suspension</code>模式类似，也存在守护条件。但该模式下守护条件不成立时，则<strong>立刻中断返回</strong></p>
+<blockquote>
+<p>使用时机</p>
+</blockquote>
+<ul>
+<li>并不需要执行，因为之前已经执行过了</li>
+<li>若守护条件不成立，想立即返回并进入下一步</li>
+<li>守护条件仅在第一次成立时</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//伪代码</span></span><br><span class="line"><span class="comment">//initialized字段状态仅变化一次，称之为【闭锁】</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GuardObject</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">initialized</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    syn <span class="title function_">init</span><span class="params">()</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(initialized) <span class="keyword">return</span>;   <span class="comment">//balking</span></span><br><span class="line">      具体处理</span><br><span class="line">      initialized = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>超时 guarded timed</p>
+</blockquote>
+<p>介于<code>Balking</code>和<code>Guarded Suspension</code>，我们选择在守护条件成立之前等待一段时间，如果到时条件还未成立，则直接<code>balk</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//伪代码</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GuardObject</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">ready</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">long</span> timeout;</span><br><span class="line">    </span><br><span class="line">    syn <span class="title function_">execute</span><span class="params">()</span>&#123;</span><br><span class="line">      <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();  <span class="comment">//开始时间</span></span><br><span class="line">      <span class="keyword">while</span>(!ready)&#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">now</span> <span class="operator">=</span> System.currentTimeMillis();  <span class="comment">//当前时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">rest</span> <span class="operator">=</span> timeout-(now-start);        <span class="comment">//剩余时间</span></span><br><span class="line">        <span class="keyword">if</span>(rest &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">TimeoutException</span>(<span class="string">&quot;...&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        wait(rest);</span><br><span class="line">      &#125;</span><br><span class="line">      具体处理</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    syn <span class="title function_">setExecutable</span><span class="params">(<span class="type">boolean</span> on)</span>&#123;</span><br><span class="line">      ready = on;</span><br><span class="line">      notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="V-Producer-Consumer"><a href="#V-Producer-Consumer" class="headerlink" title="V.Producer-Consumer"></a>V.Producer-Consumer</h3><p>生产者-消费者模式，当两者只有一个时，称之为<code>pipe</code>模式。该模式的目的是让<strong>生产者可以安全地将数据交给消费者</strong>，故而引入一个“中间角色“，负责线程协调运行</p>
+<p><strong>重要启示：线程协调运行需要考虑”放在中间的东西“；现场互斥处理需要考虑”应该保护的东西“</strong></p>
+<blockquote>
+<p>InterruptedException</p>
+</blockquote>
+<ul>
+<li><code>sleep</code>、<code>join</code>的线程被中断，立马在该线程中抛出异常</li>
+<li><code>wait</code>的线程被中断，需要在该线程重新获取锁之后才会抛出异常（即在<strong>入口队列</strong>中的线程不会被中断）</li>
+<li><strong><code>interrupt</code>不需要获取线程的锁；<code>notify/notifyAll</code>需要获取线程的锁</strong></li>
+</ul>
+<blockquote>
+<p>JUC-BolckingQueue</p>
+</blockquote>
+<ul>
+<li><code>ArrayBlockingQueue</code> <code>LinkedBlockingQueue</code></li>
+<li><code>PriorityBlockingQueue</code></li>
+<li><code>DelayQueue</code>：在元素指定时间到期后才可以<code>take</code>，到期时间最长的元素先被<code>take</code></li>
+<li><code>SynchronousQueue</code>：用于执行<code>Producer</code>角色到<code>Consumer</code>角色的<strong>直接传递</strong>，即有一方没准备好时，另一方调用接口会被阻塞</li>
+</ul>
+<blockquote>
+<p>JUC-Exchanger</p>
+</blockquote>
+<p>用于让两个线程安全地交换对象</p>
+<br/>
+
+<p><strong>课后习题：</strong></p>
+<ol>
+<li>如何实现 清除“中间角色”的所维护的数据<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">syn <span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span>&#123;</span><br><span class="line">    清除操作...</span><br><span class="line">    notifyAll();    <span class="comment">//清除完要通知所有等待队列上的线程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<br/>
+
+<h3 id="VI-Read-Write-Lock"><a href="#VI-Read-Write-Lock" class="headerlink" title="VI.Read-Write Lock"></a>VI.Read-Write Lock</h3><p>读者写者模式，<strong>对不同种类线程的互斥处理分开考虑</strong>：多个线程可以同时读取，读取时不能写入；一个线程写入时，其他线程不能读取或写入</p>
+<p>该模式适用于<strong>读取操作繁重</strong>、<strong>读取频率比写入频率高</strong>时的情况</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">ReadWriteLock</span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">int</span> <span class="variable">readingReaders</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">int</span> <span class="variable">waitingWriters</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">int</span> <span class="variable">writingWriters</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">preferWriter</span> <span class="operator">=</span> <span class="literal">true</span>;    <span class="comment">//防止写线程“饿死”</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">readLock</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException&#123;</span><br><span class="line">    <span class="keyword">while</span>(writingWriters &gt; <span class="number">0</span> || (preferWriter &amp;&amp; waitingWriters &gt; <span class="number">0</span>))&#123;</span><br><span class="line">      wait();</span><br><span class="line">    &#125;</span><br><span class="line">    readingReaders++;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">readUnLock</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException&#123;</span><br><span class="line">    readingReaders--;</span><br><span class="line">    preferWriter = <span class="literal">true</span>;</span><br><span class="line">    notifyAll();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">writeLock</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException&#123;</span><br><span class="line">    waitingWriters++;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">      <span class="keyword">while</span>(readingReaders &gt; <span class="number">0</span> || writingWriters &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        wait();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">      waitingWriters--;</span><br><span class="line">    &#125;</span><br><span class="line">    writingWriters++;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">writeUnLock</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException&#123;</span><br><span class="line">    writingWriters--;</span><br><span class="line">    preferWriter = <span class="literal">false</span>;</span><br><span class="line">    notifyAll();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>JUC-ReadWriteLock</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="type">ReadWriteLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantReadWriteLock</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Lock</span> <span class="variable">readLock</span> <span class="operator">=</span> lock.readLock();</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Lock</span> <span class="variable">writeLock</span> <span class="operator">=</span> lock.writeLock();</span><br></pre></td></tr></table></figure>
+
+<p><code>ReentrantReadWriteLock</code>主要特征：</p>
+<ul>
+<li><p><strong>公平性</strong>	</p>
+<p>让等待时间久的线程优先获得锁</p>
+</li>
+<li><p><strong>可重入性</strong>	</p>
+<p><code>Reader</code>角色的线程可以获得“用于写入的锁”，<code>Writer</code>可获得“用于读取的锁”</p>
+</li>
+<li><p><strong>锁降级</strong></p>
+</li>
+</ul>
+<br/>
+
+<p><strong>课后习题：</strong></p>
+<ol>
+<li><p><code>waitingWriters</code>和<code>preferWriters</code>字段的含义：</p>
+<p>防止<code>ReaderThread</code>或者<code>WriterThread</code>不会**“饿死”**：<code>waitingWriters &gt; 0</code>可以让<code>ReaderThread</code>线程等待，防止<code>WriterThread</code>饿死；再加上<code>preferWriters</code>控制两类进程哪一类更优先，防止<code>ReaderThread</code>饿死</p>
+</li>
+</ol>
+<br/>
+
+<h3 id="VII-Thread-Per-Message"><a href="#VII-Thread-Per-Message" class="headerlink" title="VII.Thread-Per-Message"></a>VII.Thread-Per-Message</h3><p>该模式是为每个命令或请求<strong>新分配一个线程</strong>，由这个线程来执行具体处理，实现<strong>调用与执行相分离</strong>。</p>
+<p>目的在于提高程序响应性，是否选用取决于<strong>线程启动耗时</strong>与<strong>具体操作耗时</strong>间的均衡</p>
+<blockquote>
+<p>JUC-Executor</p>
+</blockquote>
+<img src="/Blog/img/6453e32b98ce084a632551d3ff5ac185.jpg" alt="扫描件_Creates interface.jpg" style="zoom:20%;" />
+
+<ul>
+<li><code>ThreadFactory</code> 将线程创建抽象化，<code>Executor</code> 将线程执行抽象化</li>
+<li><code>ExecutorService</code> 将<strong>被复用</strong>的线程抽象化（所谓抽象化，就是对外隐藏了实现细节）</li>
+<li><code>cheduleExecutorService</code> 将被调度的线程的执行抽象化</li>
+</ul>
+<p><strong>！课后习题 7-5、7-7</strong></p>
+<br/>
+
+<h3 id="VIII-Worker-Thread-Thread-Pool"><a href="#VIII-Worker-Thread-Thread-Pool" class="headerlink" title="VIII.Worker Thread&#x2F;Thread Pool"></a>VIII.Worker Thread&#x2F;Thread Pool</h3><p>该模式类似于<code>Thread-Per-Message</code>和<code>Produce-Consumer</code>模式的结合。对于前者，优势在于新线程是事先启动的(存在于<strong>线程池</strong>中)，故而可以<strong>节省线程启动时间</strong>；对于后者，引入的线程池就相当于<code>Consumer</code>角色工作的环境，里面有<code>Channel</code>角色和<code>Consumer</code>角色</p>
+<blockquote>
+<p>Runnable的意义</p>
+</blockquote>
+<p>Runnable对象可以作为方法参数传递，可以放入队列，可以跨越网络传递，也可以被保存至文件中。故而我们可以将其看作<code>Command</code>模式下的<code>Command</code>角色</p>
+<p><strong>!课后习题8-5、8-6</strong></p>
+<br/>
+
+<h3 id="IX-Future"><a href="#IX-Future" class="headerlink" title="IX.Future"></a>IX.Future</h3><p><code>Thread-Per-Message</code>将耗费时间的处理交给其他线程，可提高响应性。但是在将处理转交出去的时候，处理结果仍然未知，而等待处理结果的话程序响应性会降低</p>
+<p><code>Future</code>意义便在于，可以**在不用降低响应性的前提下获取结果，**做到“准备返回值”和“使用返回值”相分离</p>
+<blockquote>
+<p>Future角色的变种</p>
+</blockquote>
+<ul>
+<li><strong>不让主线程久等</strong>。若<code>RealData</code>的实例还未准备好，主线程调用<code>getContent</code>方法时会进行等待(<code>Guarded Suspension</code>)，我们可以使用<code>Balking</code>，然后稍微执行些其他操作再去调用<code>getContent</code></li>
+<li>**会发生变化。**通常情况下，“返回值”仅会被设置到Future角色中一次，即Future角色的状态只会改变一次。但有时也会有给Future角色设置“当前返回值”的需求，这是我们可以考虑反复设置“返回值”。</li>
+</ul>
+<blockquote>
+<p>JUC-Future（代码见VScode）</p>
+</blockquote>
+<p><img src="/Blog/img/ae6fd5b57d3126d5e5cc12aaa63267f1.png" alt="screen-capture"></p>
+<br/>
+
+<h3 id="X-Two-Phase-Termination"><a href="#X-Two-Phase-Termination" class="headerlink" title="X.Two-Phase Termination"></a>X.Two-Phase Termination</h3><p>该模式可以做到”优雅地结束线程”，其要点在于：安全地终止线程**（安全性）<strong>、必定进行终止处理</strong>（生存性）<strong>、发出终止请求后尽快执行终止处理</strong>（响应性）**</p>
+<blockquote>
+<p>终止处理</p>
+</blockquote>
+<ul>
+<li><p>未捕获的异常处理器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Thread.setDefaultUncaughtExceptionHandler(</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Thread</span>.UncaughtExceptionHandler()&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">uncaughtException</span><span class="params">(Thread thread, Throwable e)</span>&#123;</span><br><span class="line">      <span class="comment">//执行未捕获异常的处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>退出钩子</p>
+<p><strong>指java虚拟机退出时启动的线程，使用其来编写程序完全终止时的终止处理</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Runtime.getRuntime().addShutdownHook(</span><br><span class="line">  <span class="keyword">new</span> <span class="title class_">Thread</span>()&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>&#123;</span><br><span class="line">      <span class="comment">//终止处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>JUC-CountDownLatch</p>
+</blockquote>
+<p>实现”等待<strong>指定次数</strong>的<code>CountDown</code>方法被调用”这一功能</p>
+<blockquote>
+<p>JUC-CyclicBarrier</p>
+</blockquote>
+<p><code>CountDownLatch</code>只能进行倒数计数，而<code>CyclicBarrier</code>可以<strong>周期性</strong>的创建屏障，碰到屏障的线程是无法继续前进的。屏障的解除条件是**到达屏障处的线程个数达到了指定个数，**这样屏障解除，这簇线程便会一起“冲出去”</p>
+</div><script type="text/javascript" src="/Blog/js/share.js?v=1.0.0" async></script><a class="article-share-link" data-url="https://luozero-world.github.io/Blog/2024/05/23/java-duo-xian-cheng-she-ji-mo-shi/" data-id="cmapbhorx000e1ol73y7q3rv3" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACnUlEQVR42u3aQY4CMQwEQP7/aVbaK2ho2/HAoTghGIVUDklo+/GIX8//1+v75Nt85NfPJyM/8PDw8NZ4z8tXMonraV3/1mQ+18/g4eHhbfOSw+B6oN7nvQMpX248PDy87/KSrT+/didjzg8qPDw8vO/yepv+9eTmI+Dh4eF9i3fsz/8gWc2fWcla8PDw8E7OJwoF7nx/U30PDw8Pr1hqSjbuSbE/jx6as8XDw8Nb4CWRaxUw3/rzhYuWEg8PD2+Zlxe65pfgSQBRaErAw8PDW+D1LsS9i3XeFDspm+Hh4eHt8SatTtXtOyrzD5JYPDw8vHt41atqtRA1aXittmQVhsDDw8Mb8BJGtZ00b42qRhjVaAMPDw9vg5dv03npazvUKIcUeHh4eAu8XpE+39YnF+je0o9+AA8PD6+4W1abU/PItRdeHFhKPDw8vKO8ZgNTK4BIAo5qdBsdCXh4eHjLvOrWny9Wj1SNMPDw8PC2eXmZfz6VaqGrGhN/GBkPDw/vEC+/ClfLVPP2ggOLgoeHh7fGq264kyerTQbVmOPNwYCHh4e3zOu1QOVTqU5x1OaFh4eHt8abx7v558nluHoIRa0DeHh4eAu8+RW5Ckt4+VX7zZN4eHh4t/PmTQCTxqxqUa1Z08PDw8Mb8JJCVw+Qj5+MXDhI8PDw8BZ41an0Svi9uPZUSxYeHh7eWd6kHNUrU52Ka6NjDA8PD+9GXu+6fCqczSOMD+EFHh4e3gKvGpX2MPlF/Ox7PDw8vD3epJG0etXuxRn55RsPDw/vTl6yWVej21NT7x1deHh4eL/Aq27Qk0WZhBp4eHh4v8arbujVJqp8zOjgwcPDw1vjVYtep9oOJmEuHh4e3rd4k7/61Wv0JLw43C6Ah4eH1+H9AYGSc6husQpiAAAAAElFTkSuQmCC">分享</a><div class="tags"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/tags/JUC/" rel="tag">JUC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul></div><div class="post-nav"><a class="pre" href="/Blog/2024/06/12/yin-le-tui-jian-xi-tong/">音乐推荐系统</a><a class="next" href="/Blog/2023/12/28/2023-zhe-yi-nian/">2023这一年</a></div><div class="nofancybox" id="waline"></div><link rel="stylesheet" type="text/css" href="https://unpkg.com/@waline/client@v3/dist/waline.css"><script type="module">import {init} from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+init({
+  el: '#waline',
+  comment: true,
+  serverURL: 'waline-sigma.vercel.app',
+  pageSize: '10',
+  wordLimit: '500',
+  requiredMeta,
+  emoji: [
+    '//unpkg.com/@waline/emojis@1.2.0/weibo',
+    '//unpkg.com/@waline/emojis@1.2.0/qq',
+    '//unpkg.com/@waline/emojis@1.2.0/tw-emoji',
+  ],
+});</script><script>let metaInfo = ['nick', 'mail', 'link']
+let requiredMeta = 'nick,mail'.split(',').filter(item => {
+  return metaInfo.indexOf(item) > -1
+})
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img class="nofancybox" src="/Blog/img/myphoto.jpg"/></a><p>Premature optimization is the root of all evil.</p><a class="info-icon" href="mailto:13097638440@163.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/LuoZero-World" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://space.bilibili.com/649588534" title="Bilibili" target="_blank" style="margin-inline:5px"> <i class="fa fa-reddit-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Blog/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Blog/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/Blog/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">项目总结</a><span class="category-list-count">2</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/Blog/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 15px;">基础知识</a> <a href="/Blog/tags/2023/" style="font-size: 15px;">2023</a> <a href="/Blog/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/Blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 15px;">分布式</a> <a href="/Blog/tags/2024/" style="font-size: 15px;">2024</a> <a href="/Blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/Blog/tags/JUC/" style="font-size: 15px;">JUC</a> <a href="/Blog/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/Blog/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/Blog/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 15px;">图论</a> <a href="/Blog/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">推荐系统</a> <a href="/Blog/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/Blog/tags/Nginx/" style="font-size: 15px;">Nginx</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/Blog/2025/05/15/fen-bu-shi-suo-zhu-dong-lun-xun-xing-vs-jian-ting-xing/">分布式锁：主动轮询型vs监听回调型</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2025/02/23/suan-fa-mo-ban/">算法模板</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2025/01/12/hu-lun-tun-zao-yu-hou-ji/">囫囵吞枣与2024后记</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2024/06/12/yin-le-tui-jian-xi-tong/">音乐推荐系统</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2024/05/23/java-duo-xian-cheng-she-ji-mo-shi/">Java多线程设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2023/12/28/2023-zhe-yi-nian/">2023这一年</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2023/10/07/java-he-xin-ji-zhu/">Java核心技术I (Version.12)</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://chuixue-lan.github.io/Blog/" title="吹雪の博客" target="_blank">吹雪の博客</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2025 <a href="/Blog/." rel="nofollow">LuoZero's World.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/Blog/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="https://unpkg.com/@fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/Blog/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="https://unpkg.com/@fancyapps/fancybox/dist/jquery.fancybox.min.css"><link rel="stylesheet" type="text/css" href="/Blog/css/search.css?v=1.0.0"><script type="text/javascript" src="/Blog/js/search.js?v=1.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+  search_path = 'search.xml';
+}
+var path = '/Blog/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/Blog/js/copycode.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/Blog/css/copycode.css?v=1.0.0"><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/Blog/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/Blog/js/smartresize.js?v=1.0.0"></script></div></body></html>
