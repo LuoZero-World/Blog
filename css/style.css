@@ -1556,47 +1556,6 @@ figure.highlight .line,
 }
 
 /* toc*/
-.toc-article {
-  border: 1px solid #bbb;
-  border-radius: 7px;
-  margin: 1.1em 0 0 2em;
-  padding: 0.7em 0.7em 0 0.7em;
-  max-width: 40%;
-}
-
-.toc-title {
-  font-size: 120%;
-}
-
-#toc {
-  line-height: 1em;
-  float: right;
-}
-#toc .toc {
-  padding: 0;
-  margin: 0.5em;
-  line-height: 1.8em;
-}
-#toc .toc li {
-  list-style-type: none;
-}
-#toc .toc-child {
-  margin-left: 1em;
-  padding-left: 0;
-}
-
-@media print, screen and (max-width: 48em) {
-  .toc-article {
-    margin: 0em;
-    max-width: 100%;
-  }
-  .clear {
-    padding: 2.1em 0em 0em 0em;
-  }
-  #toc {
-    float: none;
-  }
-}
 /* 固定右侧侧边栏样式 */
 #toc.toc-article {
   position: fixed;
