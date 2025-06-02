@@ -4,8 +4,9 @@ tags: [基础知识, ]
 category:
   - [技术总结]
 mathjax: true
-toc: false
+toc: true
 date: 2023-10-07 21:52:08
+description : 阅读《Java核心技术 卷I》后的一些总结
 ---
 ### IV. 对象与类
 

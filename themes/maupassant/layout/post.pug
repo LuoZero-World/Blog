@@ -34,11 +34,11 @@ block content
       a.disqus-comment-count(href=url_for(page.path) + '#waline')
         span.waline-comment-count(id=url_for(page.path))
         span= ' ' + __('Comment')
-    if page.toc
-      .clear
-        #toc.toc-article
-          .toc-title= __('contents')
-          != toc(page.content, {list_number: theme.toc_number})
+    //- if page.toc
+    //-   .clear
+    //-     #toc.toc-article
+    //-       .toc-title= __('contents')
+    //-       != toc(page.content, {list_number: theme.toc_number})
     .post-content
       != page.content
     if theme.donate.enable == true && page.donate != false
@@ -56,3 +56,8 @@ block content
 
     if page.comments
       include _partial/comments.pug
+      
+  if page.toc
+    aside#toc.toc-article
+      .toc-title= __('contents')
+      != toc(page.content, {list_number: theme.toc_number})

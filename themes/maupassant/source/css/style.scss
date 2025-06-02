@@ -19,10 +19,10 @@ button,
 input,
 select,
 textarea,
-.MJXc-TeX-unknown-R,
+.MJXc-TeX-unknown-R,    
 .pure-g [class *="pure-u"] {
     /* Set your content font stack here: */
-    font-family: "montserrat-variable", "PingFangSC-Regular", Helvetica, "Helvetica Neue", "Segoe UI", "Hiragino Sans GB", "Source Han Sans CN", "Microsoft YaHei", "STHeiti", "WenQuanYi Micro Hei", sans-serif !important;
+    font-family:"Cang Er", "montserrat-variable", "PingFangSC-Regular", Helvetica, "Helvetica Neue", "Segoe UI", "Hiragino Sans GB", "Source Han Sans CN", "Microsoft YaHei", "STHeiti", "WenQuanYi Micro Hei", sans-serif !important;
 }
 
 @font-face {
@@ -30,13 +30,18 @@ textarea,
     src: url('./Montserrat-VariableFont_wght.ttf'); //你的字体包路径
 }
 
+@font-face {
+    font-family: "Cang Er";  //自定义字体名称
+    src: url('./CangEr.ttf'); //你的字体包路径
+}
+
 body {
     background-color: #FFF;
     color: #444;
-    font-family: "montserrat-variable", "TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-family:"Cang Er", "montserrat-variable", "TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .body_container {
@@ -94,7 +99,7 @@ div {
         }
 
         #logo {
-            font: bold 38px/1.12 "montserrat-variable", "Times New Roman", Georgia, Times, sans-serif;
+            font: bold 38px/1.12 "Cang Er", "montserrat-variable", "Times New Roman", Georgia, Times, sans-serif;
             color: #555;
 
             span,
@@ -275,7 +280,7 @@ div {
         margin: 0;
         color: #555;
         text-align: left;
-        font: bold 25px/1.1 "montserrat-variable", "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
+        font: bold 25px/1.1 "Cang Er", "montserrat-variable", "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
 
         a {
             color: #555;
@@ -367,7 +372,7 @@ div {
 
     .post-content {
         clear: left;
-        font-size: 15px;
+        font-size: 17px;
         line-height: 1.77;
         color: #444;
         padding-top: 15px;
@@ -399,7 +404,7 @@ div {
                 margin: 0 5px;
                 padding: 0 5px;
                 background: #f7f8f8;
-                font-family: "montserrat-variable", Menlo, Consolas, monospace !important;
+                font-family: "Cang Er", "montserrat-variable", Menlo, Consolas, monospace !important;
             }
 
             a {
@@ -450,7 +455,7 @@ div {
                 margin: 0 5px;
                 padding: 0px 5px;
                 background: #f7f8f8;
-                font-family: "montserrat-variable", Menlo, Consolas, monospace !important;
+                font-family: "Cang Er", "montserrat-variable", Menlo, Consolas, monospace !important;
             }
 
             a {
@@ -846,7 +851,7 @@ screen and (min-width: 48em) {
 }
 
 #process span.number {
-    font-family: "montserrat-variable", 'Georgia', serif, Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
+    font-family: "Cang Er", "montserrat-variable", 'Georgia', serif, Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
     font-style: italic;
     font-size: 20px;
     line-height: 0;
@@ -877,7 +882,7 @@ screen and (min-width: 48em) {
 }
 
 .timeline-label p {
-    font-family: "montserrat-variable", Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
+    font-family: "Cang Er", "montserrat-variable", Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
     margin-bottom: 3px
 }
 
@@ -988,7 +993,7 @@ screen and (min-width: 48em) {
 #process .present,
 #process .born {
     font-size: 14px;
-    font-family: "montserrat-variable", 'Georgia', serif, Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
+    font-family: "Cang Er", "montserrat-variable", 'Georgia', serif, Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
     font-style: italic;
     color: #333;
     padding: 10px;
@@ -1130,7 +1135,7 @@ figure.highlight,
     .code,
     .tag {
         background-color: inherit;
-        font-family: "montserrat-variable", Menlo, Consolas, monospace;
+        font-family: Menlo, Consolas, monospace;
         border: none;
         padding: 0;
         margin: 0;
@@ -1197,7 +1202,7 @@ figure.highlight,
 
     .line,
     .line-number {
-        font-family: "montserrat-variable", Menlo, Consolas, monospace;
+        font-family: Menlo, Consolas, monospace;
         font-size: 1em;
         margin: 0 0 5px 0;
         user-select: none;
@@ -1921,53 +1926,99 @@ figure.highlight,
 
 /* toc*/
 
-.toc-article {
-    border: 1px solid #bbb;
-    border-radius: 7px;
-    margin: 1.1em 0 0 2em;
-    padding: 0.7em 0.7em 0 0.7em;
-    max-width: 40%;
+// .toc-article {
+//     border: 1px solid #bbb;
+//     border-radius: 7px;
+//     margin: 1.1em 0 0 2em;
+//     padding: 0.7em 0.7em 0 0.7em;
+//     max-width: 40%;
+// }
+
+// .toc-title {
+//     font-size: 120%;
+// }
+
+// #toc {
+//     line-height: 1em;
+//     float: right;
+
+//     .toc {
+//         padding: 0;
+//         margin: 0.5em;
+//         line-height: 1.8em;
+
+//         li {
+//             list-style-type: none;
+//         }
+//     }
+
+//     .toc-child {
+//         margin-left: 1em;
+//         padding-left: 0;
+//     }
+// }
+
+// @media print,
+// screen and (max-width: 48em) {
+//     .toc-article {
+//         margin: 0em;
+//         max-width: 100%;
+//     }
+
+//     .clear {
+//         padding: 2.1em 0em 0em 0em;
+//     }
+
+//     #toc {
+//         float: none;
+//     }
+// }
+
+/* 固定右侧侧边栏样式 */
+#toc.toc-article {
+  position: fixed;
+  top: 100px;            // 距离顶部距离
+  right: 10px;           // 靠屏幕右侧
+  min-width: 10%;
+  max-width: 12%;          
+  max-height: 75vh;      // 防止太长
+  overflow-y: auto;      // 内容超出时滚动
+  border: 1px solid #bbb;
+  border-radius: 7px;
+  padding: 0.7em;
+  background: #fff;
+  z-index: 1000;
+
+  .toc {
+    margin: 0.5em 0;
+    padding: 0;
+    line-height: 1.6em;
+
+    li {
+      list-style: none;
+    }
+  }
+
+  .toc-child {
+    margin-left: 1em;
+    padding-left: 0;
+  }
 }
 
+/* 标题样式 */
 .toc-title {
-    font-size: 120%;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
-#toc {
-    line-height: 1em;
-    float: right;
-
-    .toc {
-        padding: 0;
-        margin: 0.5em;
-        line-height: 1.8em;
-
-        li {
-            list-style-type: none;
-        }
-    }
-
-    .toc-child {
-        margin-left: 1em;
-        padding-left: 0;
-    }
+/* 移动端隐藏 */
+@media screen and (max-width: 768px) {
+  #toc.toc-article {
+    display: none;
+  }
 }
 
-@media print,
-screen and (max-width: 48em) {
-    .toc-article {
-        margin: 0em;
-        max-width: 100%;
-    }
-
-    .clear {
-        padding: 2.1em 0em 0em 0em;
-    }
-
-    #toc {
-        float: none;
-    }
-}
 
 
 /* table*/
@@ -2164,7 +2215,7 @@ em.search-keyword {
     min-width: 50px;
     padding: 0 14px;
     display: inline-block;
-    font-family: "montserrat-variable", "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: "Cang Er", "montserrat-variable", "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 0;

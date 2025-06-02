@@ -4,8 +4,9 @@ tags: [多线程, 设计模式, JUC]
 category:
   - [技术总结]
 mathjax: true
-toc: false
+toc: true
 date: 2024-05-23 22:14:39
+description : 阅读《Java多线程设计模式》后的一些总结
 ---
 ### 多线程评价标准
 
@@ -14,8 +15,6 @@ date: 2024-05-23 22:14:39
 - **可复用性**——类可重复利用，e.g. JUC
 
 - **性能**——能快速、大批量处理：吞吐量、响应性、容量
-
-<br/>
 
 ### I.Single Threaded Execution模式
 
