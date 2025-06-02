@@ -20,20 +20,24 @@ textarea,
 .MJXc-TeX-unknown-R,
 .pure-g [class*=pure-u] {
   /* Set your content font stack here: */
-  font-family: "montserrat-variable", "PingFangSC-Regular", Helvetica, "Helvetica Neue", "Segoe UI", "Hiragino Sans GB", "Source Han Sans CN", "Microsoft YaHei", "STHeiti", "WenQuanYi Micro Hei", sans-serif !important;
+  font-family: "Cang Er", "montserrat-variable", "PingFangSC-Regular", Helvetica, "Helvetica Neue", "Segoe UI", "Hiragino Sans GB", "Source Han Sans CN", "Microsoft YaHei", "STHeiti", "WenQuanYi Micro Hei", sans-serif !important;
 }
 
 @font-face {
   font-family: "montserrat-variable";
   src: url("./Montserrat-VariableFont_wght.ttf");
 }
+@font-face {
+  font-family: "Cang Er";
+  src: url("./CangEr.ttf");
+}
 body {
   background-color: #FFF;
   color: #444;
-  font-family: "montserrat-variable", "TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  font-family: "Cang Er", "montserrat-variable", "TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .body_container {
@@ -90,7 +94,7 @@ div {
   overflow: hidden;
 }
 #header .site-name #logo {
-  font: bold 38px/1.12 "montserrat-variable", "Times New Roman", Georgia, Times, sans-serif;
+  font: bold 38px/1.12 "Cang Er", "montserrat-variable", "Times New Roman", Georgia, Times, sans-serif;
   color: #555;
 }
 #header .site-name #logo span, #header .site-name #logo:hover {
@@ -240,7 +244,7 @@ div {
   margin: 0;
   color: #555;
   text-align: left;
-  font: bold 25px/1.1 "montserrat-variable", "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
+  font: bold 25px/1.1 "Cang Er", "montserrat-variable", "ff-tisa-web-pro", Cambria, "Times New Roman", Georgia, Times, sans-serif;
 }
 .post .post-title a {
   color: #555;
@@ -315,7 +319,7 @@ div {
 }
 .post .post-content {
   clear: left;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.77;
   color: #444;
   padding-top: 15px;
@@ -344,7 +348,7 @@ div {
   margin: 0 5px;
   padding: 0 5px;
   background: #f7f8f8;
-  font-family: "montserrat-variable", Menlo, Consolas, monospace !important;
+  font-family: "Cang Er", "montserrat-variable", Menlo, Consolas, monospace !important;
 }
 .post .post-content p a {
   color: #01579f;
@@ -389,7 +393,7 @@ div {
   margin: 0 5px;
   padding: 0px 5px;
   background: #f7f8f8;
-  font-family: "montserrat-variable", Menlo, Consolas, monospace !important;
+  font-family: "Cang Er", "montserrat-variable", Menlo, Consolas, monospace !important;
 }
 .post .post-content ul a,
 .post .post-content ol a {
@@ -731,7 +735,7 @@ pre {
 }
 
 #process span.number {
-  font-family: "montserrat-variable", "Georgia", serif, Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
+  font-family: "Cang Er", "montserrat-variable", "Georgia", serif, Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
   font-style: italic;
   font-size: 20px;
   line-height: 0;
@@ -762,7 +766,7 @@ pre {
 }
 
 .timeline-label p {
-  font-family: "montserrat-variable", Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
+  font-family: "Cang Er", "montserrat-variable", Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
   margin-bottom: 3px;
 }
 
@@ -873,7 +877,7 @@ pre {
 #process .present,
 #process .born {
   font-size: 14px;
-  font-family: "montserrat-variable", "Georgia", serif, Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
+  font-family: "Cang Er", "montserrat-variable", "Georgia", serif, Helvetica, "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
   font-style: italic;
   color: #333;
   padding: 10px;
@@ -1007,7 +1011,7 @@ figure.highlight .tag,
 .codeblock .code,
 .codeblock .tag {
   background-color: inherit;
-  font-family: "montserrat-variable", Menlo, Consolas, monospace;
+  font-family: Menlo, Consolas, monospace;
   border: none;
   padding: 0;
   margin: 0;
@@ -1062,7 +1066,7 @@ figure.highlight .line,
 
 .gist .line,
 .gist .line-number {
-  font-family: "montserrat-variable", Menlo, Consolas, monospace;
+  font-family: Menlo, Consolas, monospace;
   font-size: 1em;
   margin: 0 0 5px 0;
   user-select: none;
@@ -1593,6 +1597,47 @@ figure.highlight .line,
     float: none;
   }
 }
+/* 固定右侧侧边栏样式 */
+#toc.toc-article {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+  min-width: 10%;
+  max-width: 12%;
+  max-height: 75vh;
+  overflow-y: auto;
+  border: 1px solid #bbb;
+  border-radius: 7px;
+  padding: 0.7em;
+  background: #fff;
+  z-index: 1000;
+}
+#toc.toc-article .toc {
+  margin: 0.5em 0;
+  padding: 0;
+  line-height: 1.6em;
+}
+#toc.toc-article .toc li {
+  list-style: none;
+}
+#toc.toc-article .toc-child {
+  margin-left: 1em;
+  padding-left: 0;
+}
+
+/* 标题样式 */
+.toc-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+/* 移动端隐藏 */
+@media screen and (max-width: 768px) {
+  #toc.toc-article {
+    display: none;
+  }
+}
 /* table*/
 table {
   margin: auto auto 15px;
@@ -1749,7 +1794,7 @@ em.search-keyword {
   min-width: 50px;
   padding: 0 14px;
   display: inline-block;
-  font-family: "montserrat-variable", "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: "Cang Er", "montserrat-variable", "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0;
