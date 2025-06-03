@@ -27,10 +27,6 @@ textarea,
   font-family: "montserrat-variable";
   src: url("./Montserrat-VariableFont_wght.ttf");
 }
-@font-face {
-  font-family: "Cang Er";
-  src: url("./CangEr.ttf");
-}
 body {
   background-color: #FFF;
   color: #444;
