@@ -6,6 +6,16 @@ head
   meta(content='telephone=no', name='format-detection')
   meta(name='description', content=config.description)
   block title
+
+  //- 预加载字体（放在 CSS 之前）
+  link(rel='preload', href=url_for('CangEr.woff2'), as='font', type='font/woff2', crossorigin)
+  //- 定义 @font-face
+  style.
+    @font-face {
+      font-family: "Cang Er";
+      src: url('#{url_for("CangEr.woff2")}') format('woff2');
+    }
+
   link(rel='stylesheet', type='text/css', href=url_for(theme.css) + '/style.css' + '?v=' + theme.version)
   link(rel='stylesheet', type='text/css', href='https://unpkg.com/normalize.css')
   link(rel='stylesheet', type='text/css', href='https://unpkg.com/purecss/build/pure-min.css')
@@ -16,6 +26,7 @@ head
   link(rel='Shortcut Icon', type='image/x-icon', href=url_for('favicon.ico'))
   link(rel='apple-touch-icon', href=url_for('apple-touch-icon.png'))
   link(rel='apple-touch-icon-precomposed', href=url_for('apple-touch-icon.png'))
+
   if config.feed
     link(rel='alternate', type=feed_type, href=url_for(config.feed.path))
   if theme.google_analytics
