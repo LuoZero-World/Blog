@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="zh-CN"><head><!-- hexo injector head_begin start --><style type="text/css">.douban-card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 400px;
+}
+
+.douban-card {
+    display: flex;
+    margin: 30px 10px;
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.douban-card:hover {
+    text-decoration: none;
+}
+
+.douban-card-bgimg {
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    filter: blur(15px) brightness(0.6);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-img {
+    position: relative;
+    height: 130px;
+    width: 80px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.douban-card-left:hover .douban-card-img {
+    filter: blur(5px) brightness(0.6);
+    transform: perspective(800px) rotateX(180deg);
+}
+
+.douban-card-left .douban-card-img {
+    transition: all 500ms ease;
+}
+
+.douban-card-left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.douban-card-left .douban-card-status {
+    height: 130px;
+    width: 80px;
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 30%;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: all 500ms ease;
+}
+
+.douban-card-left:hover .douban-card-status {
+    transform: perspective(800px) rotateX(0deg);
+}
+
+.douban-card-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1.3;
+    color: antiquewhite;
+}
+
+.douban-card-item {
+    margin-top: 4px;
+}
+</style><!-- hexo injector head_begin end --><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="编程路上的随笔"><title>三指令实现闰年检查 | LuoZero's World</title><link rel="preload" href="/Blog/CangEr.woff2" as="font" type="font/woff2" crossorigin><style>@font-face {
+  font-family: "Cang Er";
+  src: url('/Blog/CangEr.woff2') format('woff2');
+}
+</style><link rel="stylesheet" type="text/css" href="/Blog/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="https://unpkg.com/normalize.css"><link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss/build/pure-min.css"><link rel="stylesheet" type="text/css" href="https://unpkg.com/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="https://unpkg.com/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/Blog/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/Blog/favicon.ico"><link rel="apple-touch-icon" href="/Blog/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/Blog/apple-touch-icon.png"><script type="text/javascript" src="https://unpkg.com/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="https://unpkg.com/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="https://unpkg.com/toastr/build/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/Blog/css/prism-ghcolors.css" type="text/css">
+<link rel="stylesheet" href="/Blog/css/prism-line-numbers.css" type="text/css"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">三指令实现闰年检查</h1><a id="logo" href="/Blog/.">LuoZero's World</a><p class="description">和光同尘,与时舒卷</p></div><div id="nav-menu"><a class="current" href="/Blog/."><i class="fa fa-home"> 首页</i></a><a href="/Blog/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/Blog/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">三指令实现闰年检查</h1><div class="post-meta">2025-06-10<span> | </span><span class="category"><a href="/Blog/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i><span class="post-count"> 5</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/Blog/2025/06/10/san-zhi-ling-shi-xian-run-nian-jian-cha/#waline"><span class="waline-comment-count" id="/Blog/2025/06/10/san-zhi-ling-shi-xian-run-nian-jian-cha/"></span><span> 条评论</span></a><div class="post-content"><p>笔者偶然在<a target="_blank" rel="noopener" href="https://news.ycombinator.com/news">Hacker News</a>上读到一篇很有趣的文章<a target="_blank" rel="noopener" href="https://hueffner.de/falk/blog/a-leap-year-check-in-three-instructions.html">A leap year check in three instructions</a>，文章仅用3条CPU指令就可以检查年份 $0 ≤ y ≤ 102499$ 是否为闰年：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_leap_year_fast</span><span class="params">(<span class="type">uint32_t</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((y * <span class="number">1073750999</span>) &amp; <span class="number">3221352463</span>) &lt;= <span class="number">126976</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>随后文章解释了其背后的运行逻辑，但有些地方笔者认为解释的不太详尽，于是有了这篇文章。当然，由于个人水平有限，如有不当之处，敬请谅解，并欢迎大家批评指正😊</p>
+<h3 id="标准方法的优化"><a href="#标准方法的优化" class="headerlink" title="标准方法的优化"></a>标准方法的优化</h3><blockquote>
+<p> There is a further trick well-known to compiler implementors on how to lower the modulo by 25. Compiling (x % 25) !&#x3D; 0 with gcc and translating back to C, we get x * 3264175145 &gt; 171798691. With multiplication at a typical latency of 3 cycles and modulo of at least 20 cycles, this is a great improvement.<br>对于将 $(x \% 25) !&#x3D; 0$ 替换为 $x * 3264175145 &gt; 17179869$，原文中提到<br>$$2^{32} ⋅ 19&#x2F;25 &#x3D; 3264175144.96 (exactly).$$<br>为便于理解，假定<br>$$2^{32} ⋅ 19&#x2F;25 &#x3D; k, k∈N+$$<br>此时 $(x \% 25) !&#x3D; 0$ 等价为 $x * k &gt; 0$，因为若x是25的倍数，那么 $x * k$ 的结果将会是一个正整数左移32位，结果上溢变为0；反之，$x * k$ 结果的小数位上不全为0，左移32位后便会出现在整数位上。<br>现在k的值为3264175145，与实际值3264175144.96有0.04的误差。若x是25的倍数，$x * k$ 的误差最高会达到 $0.04 * (2^{32}-1) &#x3D; 171798691.8$，所以 $&gt; 0$ 也就变为 $&gt; 171798691$，注意这里的运算结果类型均为<strong>整数</strong>；若x不是25的倍数，$x * k$ 的结果也一定会超过171798691，此项留给读者自行验证，实属巧妙！</p>
+</blockquote>
+<h3 id="寻找位运算的方法"><a href="#寻找位运算的方法" class="headerlink" title="寻找位运算的方法"></a>寻找位运算的方法</h3><p>不管怎么说，文章奇妙地构造了一种位运算形式 $((y * f) \&amp; m) &lt;&#x3D; t$，并通过Z3求解出 $0 ≤ y ≤ 102499$ 时 $f、m、t$ 的具体值，直接跳到它的证明部分，将<code>is_leap_year_fast</code>重写如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_leap_year_fast2</span><span class="params">(<span class="type">uint32_t</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="type">uint32_t</span> p = y * <span class="number">1073750999u</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">uint32_t</span> A = <span class="number">0b11000000000000000000000000000000</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">uint32_t</span> B = <span class="number">0b00000000000000011111000000000000</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">uint32_t</span> C = <span class="number">0b00000000000000000000000000001111</span>;</span><br><span class="line">    <span class="keyword">if</span> ((p &amp; A) != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> ((p &amp; B) != B) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> ((p &amp; C) == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>(p &amp; A) !&#x3D; 0 triggers when (y % 4) !&#x3D; 0<br>1073750999u的二进制形式为0x01000000000000000010001111010111b，因此有<br>$p &#x3D; y * 1073750999u &#x3D; y * (0x01000000000000000000000000000000b + 0x10001111010111b)$<br><code>0x01000000000000000000000000000000b</code>将y的最低两位提为p的最高两位，同时<code>0x10001111010111b</code>最多影响到p的1-30位，结果得证。</p>
+</blockquote>
+<blockquote>
+<p>(p &amp; C) &#x3D;&#x3D; 0 triggers when (y % 16) &#x3D;&#x3D; 0<br>显然，$(p \&amp; C) &#x3D;&#x3D; 0$ 成立时，$(p \% 16) &#x3D;&#x3D; 0$ 成立。又因为 $p &#x3D; y * 1073750999u$，而1073750999不会引入额外的因子2，所以 $(y \% 16) &#x3D;&#x3D; 0$ 成立，结果得证</p>
+</blockquote>
+<blockquote>
+<p>(p &amp; B) !&#x3D; B triggers when (y % 100) !&#x3D; 0<br>之前的证明已经有<br>$p &#x3D; y * (0x01000000000000000000000000000000b + 0x10001111010111b)$<br>其中只有 $0x10001111010111b &#x3D; 9175$ 影响 $p \&amp; B$ 的结果。文章中编写程序进行穷举，发现 $0 ≤ y ≤ 102499$ 时，满足 $((y * 9175) \&amp; B) &#x3D;&#x3D; B$ 的 $y$ 包含*14、*57、*71、……、*00，其中除了*00外的其他数都在第一步被筛掉了，结果得证。</p>
+</blockquote>
+<p>接下来进一步从数学上解释</p>
+<ol>
+<li>为什么会捕获 *00<br>原文中提到<br>$$2^{17} ⋅ 7&#x2F;100 &#x3D; 9175.04 (exactly).$$<br>因此9175.04与*00相乘结果的1-17位均为0，同时9175与*00相乘的结果会比9175.04与*00相乘的结果稍小，那么9175与*00相乘会导致1-17为出现较多连续的1。以500为例<br>$$9175 * 500 &#x3D; 0x10001100000000000000000b − 500 ⋅ 0.04 &#x3D; 0x10001011111111111101100b$$<br>一般而言，减去的这个小数，即 $k00*0.04$，正好让13-17位变成了1，故而满足 $(p \&amp; B) &#x3D;&#x3D; B$。但如果这个小数超过 $2^{12} &#x2F; 0.04 &#x3D; 102400$，减去它之后会使得13-17 bit 不全为1，不满足 $(p \&amp; B) &#x3D;&#x3D; B$，这解释了 $y &lt; 102500$</li>
+<li>为什么会捕获 *14、*57等 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">p = 2^17 * y * 0.r, B = 2^17 * 0.m</span><br><span class="line">p &amp; B 意味着 截断p高于17位的部分</span><br><span class="line">  p &amp; B == B  &lt;=&gt;  p 1-17位肯定覆盖 B </span><br><span class="line">  =&gt; p &gt;= B </span><br><span class="line">  &lt;=&gt; frac&#123;y*0.r&#125; &gt;= 0.m</span><br><span class="line">  &lt;=&gt; frac&#123;100*y*0.r&#125; mod 100 &gt;= 100*0.m</span><br><span class="line">带入0.r和0.m后，我们便有6.999969482421875y mod 100 ≥ 96.875</span><br></pre></td></tr></table></figure>
+对于 $y &#x3D; *00$，有 $7y mod 100 &#x3D;&#x3D; 0$，现在 $6.999…y mod 100$ 的结果会比100略小，因为存在误差 $\sigma&#x3D;7 − 6.999969482421875$。每次y增加100后，误差会不断累计，使得结果不断变小，当 $y &#x3D; (100 − 96.875) &#x2F; (7 − 6.999969482421875) &#x3D; 102400$ 后便会低于 96.875，这是 $y &lt; 102500$ 的另一种解释。<br>对于y &#x3D; *14、*71…，文章已解释详尽，不清楚的读者可自行了解乘法逆元、扩展欧几里得算法等概念再做理解。</li>
+</ol>
+</div><script type="text/javascript" src="/Blog/js/share.js?v=1.0.0" async></script><a class="article-share-link" data-url="https://luozero-world.github.io/Blog/2025/06/10/san-zhi-ling-shi-xian-run-nian-jian-cha/" data-id="cmbqoqrt80007ekl7440h5grc" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADOUlEQVR42u3awXLiMBAE0Pz/T7NVeyUx3SNlF4vnUwqM0ROHjmbm6yu+Hn+v9vXndx9P1/r9P61hw4WNjY19E/bj8nrmXS/3+jk/bVZ7Z/vt32wNNjY29nHs63BKwiMPpzzA8vSpgxYbGxv7I9ntstrtyw8kyfOxsbGxsa8fF/27fxlX68eJf5rb2NjY2G/PTkIij6W2zZBHZr6J22pp2NjY2G/P3nu0+L9//2J/GxsbG/st2Y/RtfK0lYNEHlQv1oCNjY19EHtW+p+N5sxawiuffSHCxsbGPoI9i5m97Nl3Xb/+YoXY2NjYx7GTIn7e0M1L9nk45c+JNhobGxv7IHbbxN11jNnVYG4bGPUkETY2Nvbbs/NiehJdbVMhj64W9iIssbGxsQ9l/8ZMS3vUaYc187iNWrzY2NjYt2XvXe76Vg771fk6sbGxsY9j523UlXfbMtZslCfaMmxsbOyD2G2hvx3QyUtReXt45X5sbGzsU9l5LCUBs9KanTWbl0Z2sLGxsW/Obsv0K1vwG2NAbaAOuxPY2NjYN2Tnj1u5ZqM8ybDOi2/ExsbGPojdDji2BZ31rWzbD8OfChsbG/vm7HyAsh24rA8Jo7LRcCXY2NjYB7FXmrhJnORbtitKi0IVNjY29s3ZeVGpPWa0DYC2bDQ7CNXtAWxsbOy3Z7dF/xl49npbYMrDDxsbG/skdn7kyGGzO2fDOm3D+CvfJ2xsbOybsK9jY5aH+eEhL2ntHQ/FxsbGPomdF/TXDyd5AzgH5IeZb9oD2NjY2AexV/6531XQXz9yDOtn2NjY2Ddnt3GSIPNga49DbYu3PpBgY2Nj35a9q+A+i6LkgNFu7rCWho2NjX0oOynczMKjLQa1K6kbvdjY2Ng3Z89KSHlU5ItbWnQswsbGxj6D/SivvQM6u6KujTdsbGzsk9gribcyIplvWbsps3DFxsbGvjt71tCd3Z9sbns4aUc2sbGxsU9ltw2DWeu3HcRcLzD9+FlsbGzsD2ZfB087xLlSllpqM2BjY2N/JDsp2extD7ffVRS5sLGxsY9jt5GwXsSfjXvOmtDY2NjYZ7Nnjd6VI0GOb6Nu9lNhY2Nj35b9B9ElZBeOe/7AAAAAAElFTkSuQmCC">分享</a><div class="tags"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul></div><div class="post-nav"><a class="next" href="/Blog/2025/05/15/fen-bu-shi-suo-zhu-dong-lun-xun-xing-vs-jian-ting-xing/">分布式锁：主动轮询型vs监听回调型</a></div><div class="nofancybox" id="waline"></div><link rel="stylesheet" type="text/css" href="https://unpkg.com/@waline/client@v3/dist/waline.css"><script type="module">import {init} from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+init({
+  el: '#waline',
+  comment: true,
+  serverURL: 'waline-sigma.vercel.app',
+  pageSize: '10',
+  wordLimit: '500',
+  requiredMeta,
+  emoji: [
+    '//unpkg.com/@waline/emojis@1.2.0/weibo',
+    '//unpkg.com/@waline/emojis@1.2.0/qq',
+    '//unpkg.com/@waline/emojis@1.2.0/tw-emoji',
+  ],
+});</script><script>let metaInfo = ['nick', 'mail', 'link']
+let requiredMeta = 'nick,mail'.split(',').filter(item => {
+  return metaInfo.indexOf(item) > -1
+})
+</script></div><aside class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E6%96%B9%E6%B3%95%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-text">标准方法的优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">寻找位运算的方法</span></a></li></ol></aside></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img class="nofancybox" src="/Blog/img/myphoto.jpg"/></a><p>Premature optimization is the root of all evil.</p><a class="info-icon" href="mailto:13097638440@163.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/LuoZero-World" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://space.bilibili.com/649588534" title="Bilibili" target="_blank" style="margin-inline:5px"> <i class="fa fa-reddit-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Blog/categories/%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">技术总结</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Blog/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/Blog/categories/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">项目总结</a><span class="category-list-count">2</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/Blog/tags/2023/" style="font-size: 15px;">2023</a> <a href="/Blog/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/Blog/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/Blog/tags/JUC/" style="font-size: 15px;">JUC</a> <a href="/Blog/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 15px;">基础知识</a> <a href="/Blog/tags/2024/" style="font-size: 15px;">2024</a> <a href="/Blog/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/Blog/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 15px;">数论</a> <a href="/Blog/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 15px;">分布式</a> <a href="/Blog/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/Blog/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 15px;">图论</a> <a href="/Blog/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">推荐系统</a> <a href="/Blog/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/Blog/tags/Nginx/" style="font-size: 15px;">Nginx</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/Blog/2025/06/10/san-zhi-ling-shi-xian-run-nian-jian-cha/">三指令实现闰年检查</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2025/05/15/fen-bu-shi-suo-zhu-dong-lun-xun-xing-vs-jian-ting-xing/">分布式锁：主动轮询型vs监听回调型</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2025/02/23/suan-fa-mo-ban/">算法模板</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2025/01/12/hu-lun-tun-zao-yu-hou-ji/">囫囵吞枣与2024后记</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2024/06/12/yin-le-tui-jian-xi-tong/">音乐推荐系统</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2024/05/23/java-duo-xian-cheng-she-ji-mo-shi/">Java多线程设计模式</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2023/12/28/2023-zhe-yi-nian/">2023这一年</a></li><li class="post-list-item"><a class="post-list-link" href="/Blog/2023/10/07/java-he-xin-ji-zhu/">Java核心技术I (Version.12)</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://chuixue-lan.github.io/Blog/" title="吹雪の博客" target="_blank">吹雪の博客</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2025 <a href="/Blog/." rel="nofollow">LuoZero's World.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/Blog/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="https://unpkg.com/@fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/Blog/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="https://unpkg.com/@fancyapps/fancybox/dist/jquery.fancybox.min.css"><link rel="stylesheet" type="text/css" href="/Blog/css/search.css?v=1.0.0"><script type="text/javascript" src="/Blog/js/search.js?v=1.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+  search_path = 'search.xml';
+}
+var path = '/Blog/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/Blog/js/copycode.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/Blog/css/copycode.css?v=1.0.0"><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/Blog/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/Blog/js/smartresize.js?v=1.0.0"></script></div></body></html>
